@@ -3,6 +3,7 @@ package RPC_Version3.Common;
 import RPC_Version2.Common.RPCResponse2;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  *      Result object
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter

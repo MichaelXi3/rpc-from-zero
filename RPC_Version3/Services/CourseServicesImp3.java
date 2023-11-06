@@ -1,7 +1,5 @@
 package RPC_Version3.Services;
 
-import RPC_Version3.Common.Course3;
-
 import java.util.Random;
 
 public class CourseServicesImp3 implements CourseServices3 {

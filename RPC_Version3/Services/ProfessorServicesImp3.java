@@ -1,7 +1,5 @@
 package RPC_Version3.Services;
 
-import RPC_Version3.Common.Professor3;
-
 public class ProfessorServicesImp3 implements ProfessorServices3 {
     @Override
     public Professor3 getProfessorById(Integer id) {

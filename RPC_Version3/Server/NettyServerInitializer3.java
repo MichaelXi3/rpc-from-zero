@@ -1,16 +1,12 @@
 package RPC_Version3.Server;
 
+import RPC_Version3.Serialize.MyRPCDecoder3;
+import RPC_Version3.Serialize.MyRPCEncoder3;
+import RPC_Version3.Serialize.Serializer.KryoSerializer3;
 import RPC_Version3.Services.ServiceProvider3;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.ChannelInitializer;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.serialization.ClassResolver;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import lombok.AllArgsConstructor;
 
 /**
@@ -24,10 +20,21 @@ public class NettyServerInitializer3 extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
+        ChannelPipeline pipeline = ch.pipeline();
+        pipeline.addLast(new MyRPCDecoder3());
+        pipeline.addLast(new MyRPCEncoder3());
+        pipeline.addLast(new NettyRPCServerHandler3(serviceProvider));
+    }
+
+    /**
+     * 👇 the pipeline implementation before MyEncoder and MyDecoder that uses Java Serialization
+     */
+    /* protected void initChannel(SocketChannel ch) throws Exception {
         // get the channel pipeline of newly created channel
         ChannelPipeline pipeline = ch.pipeline();
         System.out.println("[NettyServerInitializer] Server Side Channel is Visited");
-        // ** configure the channel pipeline **
+
+        // configure the channel pipeline
         // inbound 1: frame decoder
             // LengthFieldBasedFrameDecoder： A decoder in Netty for solving sticky and unwrapped packets for length-based protocols.
             // It determines the boundaries of a message based on the length field in the message.
@@ -51,7 +58,7 @@ public class NettyServerInitializer3 extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new ObjectEncoder());
 
         // pipeline.addLast("logger", new LoggingHandler(LogLevel.INFO));
-    }
+    } */
 }
 
 

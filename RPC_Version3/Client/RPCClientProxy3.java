@@ -30,7 +30,8 @@ public class RPCClientProxy3 implements InvocationHandler {
                 .parameterTypes(method.getParameterTypes())
                 .build();
 
-        System.out.println("[Client Proxy] Invoking method: " + methodName);
+        System.out.println("#########################################################################");
+        System.out.println("[Client Proxy] Invoking method: " + methodName + " ; " + "Interface: " + interfaceName);
         RPCResponse3 response = client.sendRequest(request);
         return response.getData();
     }

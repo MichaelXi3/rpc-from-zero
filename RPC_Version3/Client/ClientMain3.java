@@ -1,11 +1,9 @@
 package RPC_Version3.Client;
 
-import RPC_Version3.Common.Course3;
-import RPC_Version3.Common.Professor3;
+import RPC_Version3.Services.Course3;
+import RPC_Version3.Services.Professor3;
 import RPC_Version3.Services.CourseServices3;
 import RPC_Version3.Services.ProfessorServices3;
-
-import java.util.Random;
 
 public class ClientMain3 {
     public static void main(String[] args) {

@@ -1,21 +1,27 @@
 package RPC_Version3.Client;
 
+import RPC_Version3.Serialize.MyRPCDecoder3;
+import RPC_Version3.Serialize.MyRPCEncoder3;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.serialization.ClassResolver;
-import io.netty.handler.codec.serialization.ObjectDecoder;
-import io.netty.handler.codec.serialization.ObjectEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class NettyClientInitializer3 extends ChannelInitializer<SocketChannel> {
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
+        ChannelPipeline pipeline = ch.pipeline();
+        pipeline.addLast(new MyRPCDecoder3());
+        pipeline.addLast(new MyRPCEncoder3());
+        pipeline.addLast(new NettyClientHandler3());
+    }
+
+    /**
+     * 👇 the pipeline implementation before MyEncoder and MyDecoder that uses Java Serialization
+     */
+    /* protected void initChannel(SocketChannel ch) throws Exception {
         // get the channel pipeline of newly created channel
         ChannelPipeline pipeline = ch.pipeline();
         System.out.println("[NettyClientInitializer] Client Side Channel is Visited");
@@ -43,5 +49,5 @@ public class NettyClientInitializer3 extends ChannelInitializer<SocketChannel> {
 
         // outbound 1: object encoder
         pipeline.addLast(new ObjectEncoder());
-    }
+    } */
 }

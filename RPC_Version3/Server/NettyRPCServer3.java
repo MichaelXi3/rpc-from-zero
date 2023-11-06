@@ -28,7 +28,7 @@ public class NettyRPCServer3 implements RPCServer3 {
 
             // bind server to a specific port
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
-            System.out.println("-------- Netty Server Launched, Listening on port " + port + " --------");
+            System.out.println("-------- Netty Server Launched, Listening on port " + port + " -----------");
             // block the server socket thread util channel close, make sure the server is keep running
             Channel serverSocket = channelFuture.channel();
             serverSocket.closeFuture().sync();
