@@ -1,4 +1,4 @@
-# RPC
+# RPC-From-Zero
 
 # RPC Architecture
 
